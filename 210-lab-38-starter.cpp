@@ -31,37 +31,39 @@ int main() {
         cout << "File not found.\n";
     }
 
+    // Value display
+    tree.displayInOrder();
+    cout << "\nDisplay of initial codes in the tree.\n";
+
     // Menu
     int sel = main_menu();
+    string code;
     while (sel != 5) {
         switch (sel) {
+        
             case 1:
                 cout << "You chose to add to the record.\n";
-                //tree.insertNode();
+                cout << "Type in a code (8 digits containing letters and numbers only): ";
+                tree.insertNode(code);
                 break;
             case 2:
                 cout << "You chose to delete from the record.\n";
-
+                cout << "Enter a code to delete (8 digits containing letters and numbers only): ";
+                tree.remove(code);
+                break;
+            case 3:
+                cout << "You chose to search the record.\n";
+                cout << "Type in a code to search for (8 digits containing letters and numbers only): ";
+                tree.searchNode(code);
+                break;
+            case 4:
+                cout << "You chose to modify the record.\n";
+                // code
                 break;
         }
     }
 
-    // Value display
-    tree.displayInOrder();
-    cout << "Display of initial codes in the tree.\n";
-
     /*
-    // Adding a value
-    cout << "\nAdding a code to the tree...\n";
-    tree.insertNode("");
-
-    // Deleting a value
-    cout << "\nDeleting a code from the tree...\n";
-    tree.remove("");
-
-    // Search and modify records
-    // Code
-
     cout << "\nDisplaying current codes in the tree:\n";
     tree.displayInOrder(); cout << endl;
     */
