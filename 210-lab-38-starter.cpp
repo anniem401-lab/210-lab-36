@@ -1,9 +1,6 @@
 // COMSC-210 | Lab 36 | Annie Morales
 // IDE used: Visual Studio Code
 
-// To Do: Milestone 4
-// Code's menu is functional.
-
 #include <iostream>
 #include "IntBinaryTree.h"
 #include <fstream>
@@ -18,14 +15,14 @@ int main() {
 
     // Checking file
     ifstream fin;
-    fin.open("codes.txt");
+    fin.open("codes.txt"); // File opened
     if (fin.good()) {
         string codes;
 
         while (fin >> codes) {
             tree.insertNode(codes);
         }
-        fin.close();
+        fin.close(); // File closed
     }
     else {
         cout << "File not found.\n";
@@ -33,8 +30,9 @@ int main() {
 
     // Value display
     tree.displayInOrder();
-    cout << "\nThe codes above are displayed by InOrder method.\n";
-    cout << "Note: Codes are mixed numbers & letters, 8 characters long.\n";
+    cout << "\nNote:\n";
+    cout << "-The codes above are displayed by InOrder method.\n";
+    cout << "-Codes are mixed numbers & letters, 8 characters long.\n";
 
     // Menu
     int sel = main_menu();
@@ -46,14 +44,14 @@ int main() {
                 cout << "\nYou chose to add to the record.\n";
                 cout << "Type in a code (Codes are 8 characters with letters & numbers): ";
                 cin >> code;
-                tree.insertNode(code); // uANq6eH7
+                tree.insertNode(code);
                 cout << code << " inserted!\n";
                 break;
             case 2:
                 cout << "\nYou chose to delete from the record.\n";
                 cout << "Enter a code to delete (Codes are 8 characters with letters & numbers): ";
                 cin >> code;
-                if (tree.searchNode(code)) {
+                if (tree.searchNode(code)) { // Input validation
                     cout << code << " found!\n";
                     tree.remove(code);
                     cout << code << " removed!\n";
@@ -66,7 +64,7 @@ int main() {
                 cout << "\nYou chose to search the record.\n";
                 cout << "Type in a code to search for (Codes are 8 characters with letters & numbers): ";
                 cin >> code;
-                if (tree.searchNode(code)) {
+                if (tree.searchNode(code)) { // Input validation
                 cout << code << " has been found!\n";
                 }
                 else {
@@ -74,12 +72,23 @@ int main() {
                 }
                 break;
             case 4:
-                cout << "You chose to modify the record.\n";
-                // code
+                cout << "\nYou chose to modify the record.\n";
+                cout << "Type in a code to modify (Codes are 8 characters with letters & numbers): ";
+                cin >> code;
+                if (tree.searchNode(code)) { // Input validation
+                    cout << code << " has been found!\n";
+                    cout << "Rewrite the code: ";
+                    cin >> code;
+                    tree.insertNode(code);
+                    cout << "The code has been modified and " << code << " has been inserted!\n";
+                }
+                else {
+                    cout << code << " not found!\n";
+                }
                 break;
             case 5:
-                cout << "You chose to display the record.\n";
                 tree.displayInOrder();
+                cout << "You chose to display the record.\n";
                 break;
             case 6:
                 return 1;
@@ -90,6 +99,9 @@ int main() {
     return 0;
 }
 
+// main_menu displays the numbers of choices
+// arguments: none
+// returns: int of user's choice
 int main_menu() {
     cout << "\n** Main Menu **\n";
     cout << "[1] Add to the record\n";
@@ -98,10 +110,10 @@ int main_menu() {
     cout << "[4] Modify the record\n";
     cout << "[5] Display record\n";
     cout << "[6] Exit the program\n";
-    cout << "Enter your choice -> ";
+    cout << "Enter your choice -> "; // users input
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 6) {
+    while (choice < 1 || choice > 6) { // Input validation
         cout << "Invalid input, only select a number between 1-6: ";
         cin >> choice;
         cin.ignore(1000, 10);
