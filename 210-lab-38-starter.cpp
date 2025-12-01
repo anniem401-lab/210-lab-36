@@ -2,7 +2,7 @@
 // IDE used: Visual Studio Code
 
 // To Do: Milestone 4
-// Your code's menu is functional.
+// Code's menu is functional.
 
 #include <iostream>
 #include "IntBinaryTree.h"
@@ -20,10 +20,10 @@ int main() {
     ifstream fin;
     fin.open("codes.txt");
     if (fin.good()) {
-        string code;
+        string codes;
 
-        while (fin >> code) {
-            tree.insertNode(code);
+        while (fin >> codes) {
+            tree.insertNode(codes);
         }
         fin.close();
     }
@@ -38,25 +38,27 @@ int main() {
     // Menu
     int sel = main_menu();
     string code;
-    while (sel != 7) {
+    while (sel != 6) {
         switch (sel) {
         
             case 1:
-                cout << "You chose to add to the record.\n";
+                cout << "\nYou chose to add to the record.\n";
                 cout << "Type in a code (8 digits containing letters and numbers only): ";
-                getline(cin, code);
+                cin >> code;
                 tree.insertNode(code); // TESTING1
+                cout << code << " inserted!\n";
                 break;
             case 2:
                 cout << "You chose to delete from the record.\n";
                 cout << "Enter a code to delete (8 digits containing letters and numbers only): ";
-                getline(cin, code);
+                cin >> code;
                 tree.remove(code); // zzzvpPa2
+                cout << code << " removed!\n";
                 break;
             case 3:
                 cout << "You chose to search the record.\n";
                 cout << "Type in a code to search for (8 digits containing letters and numbers only): ";
-                getline(cin, code);
+                cin >> code;
                 tree.searchNode(code);
                 break;
             case 4:
@@ -66,17 +68,13 @@ int main() {
             case 5:
                 cout << "You chose to display the record.\n";
                 tree.displayInOrder();
-                sel = main_menu();
                 break;
             case 6:
-                cout << "You chose to exit the program. See you next time!\n";
                 return 1;
         }
+        sel = main_menu();
     }
-
-    cout << "\n1. Project is set up and running using the provided files.";
-    cout << "\n2. Code modification from int to strings is complete, and code exercises this for testing.";
-    cout << "\n3. Code successfully creates a BST from the records and outputs it using the method of my choosing.";
+    cout << "You have exited the program. See you next time!\n";
     return 0;
 }
 
@@ -90,10 +88,11 @@ int main_menu() {
     cout << "[6] Exit the program\n";
     cout << "Enter your choice -> ";
     int choice;
-    cin >> choice; cout << endl;
-    while (choice < 0 || choice > 6) {
+    cin >> choice;
+    while (choice < 1 || choice > 6) {
         cout << "Invalid input, only select a number between 1-6: ";
         cin >> choice;
+        cin.ignore(1000, 10);
     }
     return choice;
 }
