@@ -1,6 +1,7 @@
 // COMSC-210 | Lab 36 | Annie Morales
 // IDE used: Visual Studio Code
 
+// Header files
 #include <iostream>
 #include "IntBinaryTree.h"
 #include <fstream>
@@ -11,7 +12,7 @@ using namespace std;
 int main_menu();
 
 int main() {
-    IntBinaryTree tree;
+    IntBinaryTree tree; // BST initialized
 
     // Checking file
     ifstream fin;
@@ -24,8 +25,9 @@ int main() {
         }
         fin.close(); // File closed
     }
-    else {
-        cout << "File not found.\n";
+    else { // Error handling
+        cout << "\nERROR: File not found! Check the file and try again.";
+        return 1; // Exits out the program entirely
     }
 
     // Value display
@@ -42,14 +44,19 @@ int main() {
         
             case 1:
                 cout << "\nYou chose to add to the record.\n";
-                cout << "Type in a code (Codes are 8 characters with letters & numbers): ";
+                cout << "Type in a code (Codes are 8 characters long with letters & numbers): ";
                 cin >> code;
-                tree.insertNode(code);
-                cout << code << " inserted!\n";
+                if (code.size() == 8) { // Input validation
+                    tree.insertNode(code);
+                    cout << code << " inserted!\n";
+                }
+                else {
+                    cout << "Code must be 8 characters long with letters & numbers. Try again.";
+                }
                 break;
             case 2:
                 cout << "\nYou chose to delete from the record.\n";
-                cout << "Enter a code to delete (Codes are 8 characters with letters & numbers): ";
+                cout << "Enter a code to delete (Codes are 8 characters long with letters & numbers): ";
                 cin >> code;
                 if (tree.searchNode(code)) { // Input validation
                     cout << code << " found!\n";
@@ -57,23 +64,23 @@ int main() {
                     cout << code << " removed!\n";
                 }
                 else {
-                    cout << code << " doesn't exist in the record!\n";
+                    cout << code << " doesn't exist in the record! Try again.\n";
                 }
                 break;
             case 3:
                 cout << "\nYou chose to search the record.\n";
-                cout << "Type in a code to search for (Codes are 8 characters with letters & numbers): ";
+                cout << "Type in a code to search for (Codes are 8 characters long with letters & numbers): ";
                 cin >> code;
                 if (tree.searchNode(code)) { // Input validation
                 cout << code << " has been found!\n";
                 }
                 else {
-                    cout << code << " not found!\n";
+                    cout << code << " not found! Try again.\n";
                 }
                 break;
             case 4:
                 cout << "\nYou chose to modify the record.\n";
-                cout << "Type in a code to modify (Codes are 8 characters with letters & numbers): ";
+                cout << "Type in a code to modify (Codes are 8 characters long with letters & numbers): ";
                 cin >> code;
                 if (tree.searchNode(code)) { // Input validation
                     cout << code << " has been found!\n";
@@ -83,7 +90,7 @@ int main() {
                     cout << "The code has been modified and " << code << " has been inserted!\n";
                 }
                 else {
-                    cout << code << " not found!\n";
+                    cout << code << " not found! Try again.\n";
                 }
                 break;
             case 5:
@@ -91,11 +98,11 @@ int main() {
                 cout << "You chose to display the record.\n";
                 break;
             case 6:
-                return 1;
+                return 1; // Exits out the program entirely
         }
-        sel = main_menu();
+        sel = main_menu(); // Returns back to main_menu after selection
     }
-    cout << "You have exited the program. See you next time!\n";
+    cout << "\nYou have exited the program. See you next time!\n";
     return 0;
 }
 
