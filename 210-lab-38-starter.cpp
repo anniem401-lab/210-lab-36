@@ -33,7 +33,8 @@ int main() {
 
     // Value display
     tree.displayInOrder();
-    cout << "\nDisplay of initial codes in the tree.\n";
+    cout << "\nThe codes above are displayed by InOrder method.\n";
+    cout << "Note: Codes are mixed numbers & letters, 8 characters long.\n";
 
     // Menu
     int sel = main_menu();
@@ -43,23 +44,34 @@ int main() {
         
             case 1:
                 cout << "\nYou chose to add to the record.\n";
-                cout << "Type in a code (8 digits containing letters and numbers only): ";
+                cout << "Type in a code (Codes are 8 characters with letters & numbers): ";
                 cin >> code;
-                tree.insertNode(code); // TESTING1
+                tree.insertNode(code); // uANq6eH7
                 cout << code << " inserted!\n";
                 break;
             case 2:
-                cout << "You chose to delete from the record.\n";
-                cout << "Enter a code to delete (8 digits containing letters and numbers only): ";
+                cout << "\nYou chose to delete from the record.\n";
+                cout << "Enter a code to delete (Codes are 8 characters with letters & numbers): ";
                 cin >> code;
-                tree.remove(code); // zzzvpPa2
-                cout << code << " removed!\n";
+                if (tree.searchNode(code)) {
+                    cout << code << " found!\n";
+                    tree.remove(code);
+                    cout << code << " removed!\n";
+                }
+                else {
+                    cout << code << " doesn't exist in the record!\n";
+                }
                 break;
             case 3:
-                cout << "You chose to search the record.\n";
-                cout << "Type in a code to search for (8 digits containing letters and numbers only): ";
+                cout << "\nYou chose to search the record.\n";
+                cout << "Type in a code to search for (Codes are 8 characters with letters & numbers): ";
                 cin >> code;
-                tree.searchNode(code);
+                if (tree.searchNode(code)) {
+                cout << code << " has been found!\n";
+                }
+                else {
+                    cout << code << " not found!\n";
+                }
                 break;
             case 4:
                 cout << "You chose to modify the record.\n";
